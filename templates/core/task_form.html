@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="header-bar">
+    <a href="{% url 'tasks' %}">&#8592; Back</a>
+</div>
+
+<div class="flex justify-center w-full my-10">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.non_form_errors }}
+        {{ form.as_p }}
+
+        {{ formset.management_form }}
+        {{ formset.non_form_errors }}
+        
+        <div id="qweqweqwewqe" class="{{task_step_formset.prefix}}">
+            {% for form in formset %}
+                {{ form }}
+            {% endfor %}
+        </div>
+
+        <p class="justify-center flex">
+            <button id="create-button" class="w-60 text-gray-900 bg-white border border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 my-2 ">
+                Submit
+            </button>
+        </p>
+    </form>
+</div>
+
+{% endblock content %}

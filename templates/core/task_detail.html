@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+{{ task.title }}
+
+
+{% if task.complete %}
+    <p>Task status = completed</p>
+{% else %}
+    <p>Task status = ongoing</p>
+{% endif %}
+
+<div>Created at: {{ task.created }}</div>
+
+{% if task.description %}
+    <p>{{ task.description}}</p>
+{% endif %}
+
+
+{% endblock %}

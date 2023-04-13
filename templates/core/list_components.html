@@ -1,0 +1,136 @@
+{% url 'today-tasks' as 2d %}
+{% url 'last-3-days-tasks' as l3d %}
+{% url 'overdue-tasks' as od %}
+{% url 'tasks' as at %}
+
+{% if request.path == 2d %}
+
+{% for task in today %}
+    <div id="task-container" class="flex pl-2 justify-between w-80 shadow-lg border-2 border-gray-900 rounded-lg my-1">
+        <a href="task/{{ task.id }}/">{{ task }}</a>
+
+        <a href="task-delete/{{ task.id }}" class="trigger-btn bg-gray-800 rounded-r-md hover:bg-white hover:border-l-4 ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="stroke-white w-6 h-6 hover:stroke-gray-800">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>  
+        </a>     
+    </div>
+{% endfor %}
+
+{% elif request.path == l3d %}
+
+{% for three_task in last_3_days %}
+    <div id="task-container" class="flex pl-2 justify-between w-80 shadow-lg border-2 border-gray-900 rounded-lg my-1">
+        <a href="task/{{ three_task.id }}/">{{ three_task }}</a>
+
+        <a href="task-delete/{{ task.id }}" class="trigger-btn bg-gray-800 rounded-r-md hover:bg-white hover:border-l-4 hover:stroke-gray-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="stroke-white w-6 h-6 hover:stroke-gray-800">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>  
+        </a>     
+    </div>
+{% endfor %}
+
+
+{% elif request.path == od %}
+
+{% for overdue_task in overdue %}    
+
+    <div id="task-container" class="flex pl-2 justify-between w-80 shadow-lg border-2 border-gray-900 rounded-lg my-1">
+        <a href="task/{{ overdue_task.id }}/">{{overdue_task}}</a>
+        
+
+        <a href="task-delete/{{ task.id }}" class="trigger-btn bg-gray-800 rounded-r-md">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="stroke-white w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>  
+        </a>     
+    </div>
+    
+{% endfor %}
+
+{% elif request.path == at %}
+
+{% for task in all_tasks %}
+    <div id="task-container">
+        <div id="task-wrapper" class="flex pl-2 justify-between w-80 shadow-lg border-2 border-gray-900 rounded-lg my-1">
+            <div class="flex">
+                <a href="task/{{ task.id }}/">{{ task }}</a>
+
+                <a href="" id="shevron">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </a>
+            </div>
+
+            <a href="task-delete/{{ task.id }}" class="bg-gray-800 rounded-r-md hover:bg-white hover:border-l-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="stroke-white w-6 h-6 hover:stroke-gray-800">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>      
+            </a>    
+        </div> 
+
+        <ul id="steps-container" class="">
+            {% for step in steps %}
+                {% if task.id == step.task_id  %}
+                <div class="flex ">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                    </svg>
+                    <li class="">{{ step }}</li>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    
+{% endfor %}  
+{% endif %}
+
+
+<script>
+    elements = document.querySelectorAll('#shevron');
+    elements.forEach(function(button) {
+        button.addEventListener('click', slide);
+    });
+    
+    function slide() {  
+    elements.forEach(element => {
+        container = element.closest('#task-container')
+        container.querySelector('#steps-container').slideToggle();
+    });
+    }
+    
+
+</script>
+
+$(this).closest('li').find('ul').slideToggle();
+
+----------------------------------------------------------------------
+elements.forEach(element => {
+    container = element.closest('#task-container')
+    console.log('closest container', container.querySelector('#steps-container'));
+}); 
+-------------------finds steps-container -----------------------------
+
+
+elements = document.querySelectorAll('#steps-container');
+    elements.forEach(element => {
+        $(this).closest('')
+    });
+
+
+
+
+$('#shevron').click(function(){
+    $('#steps-container').slideToggle();
+    return false;
+});
+
+document.querySelectorAll('#shevron').forEach(function click() {
+    $('#task-container').find('#steps-container').slideToggle() 
+
+});
