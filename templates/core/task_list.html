@@ -3,8 +3,8 @@
 
 
 {% block content %}
-<div class="flex justify-between h-screen">
-    
+<div id="sections-wrapper" class="flex justify-between" style="height: 100vh" >
+
     <section id="left-section" class="bg-gray-800 w-32 px-2 rounded-tr-lg">
 
         <a id="statuses" href="{% url 'tasks' %}">
@@ -46,7 +46,7 @@
 
     </section>
 
-    <section id="right-section" class="grow ">
+    <section id="right-section" class="grow text-zinc-300">
             <!-- это в хедврапер 
                 <div id="search-area" class="my-2  pl-2">
                 <h3 class="pt-2">Create a <a class="text-cyan-700" href="task-create/{{ user.id }}">New task</a> ! </h3>
@@ -64,7 +64,7 @@
                 <p class="">You have <b>{{count}}</b> incomplete task{{ count|pluralize:"s" }}</p>
             </div> -->
 
-        <div id="list-wrapper"  class="">
+        <div id="list-wrapper"  class="flex justify-center" >
             <div id="task-list" class=" mx-auto max-w-screen-xl py-4 flex-column flex items-center">
                 {% include 'core/list_components.html' %}             
             </div>

@@ -48,10 +48,9 @@ class TaskList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         now = timezone.now()
-       
         #3days/today 
         # last_3_days = Task.objects.filter(user_date__lte=(now + timedelta(days=3)))
-        last_3_days = Task.objects.filter(user_date__gte=(now - timedelta(days=3)))
+        last_3_days = Task.objects.filter(user_date__lte=(now - timedelta(days=3)))
         # today = Task.objects.filter(user_date__lte=(now + timedelta(days=1)))
         today = Task.objects.filter(user_date__lte=(now + timedelta(days=1)))
      
